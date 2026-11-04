@@ -3,296 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miraç | معراج - Filistin Ürünleri</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<title>Miraç | معراج</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <style>
-:root{--bg-body:#f7f4ee;--bg-section:#fff;--gold:#b89558;--gold-light:#d4b57a;--gold-dark:#8a6a3a;--text-main:#1a1a1a;--text-light:#666;--white:#fff;--card-bg:#fff;--border-color:#e0e0e0;--font-ar:'Cairo',sans-serif;--transition:all .4s ease;--header-bg:rgba(255,255,255,.98);--header-text:#1a1a1a;--pal-red:#ce1126;--pal-green:#007a3d;--pal-black:#000;}
-body.dark-mode{--bg-body:#0d0d0d;--bg-section:#141414;--gold:#c9a96e;--gold-light:#e8d5b0;--gold-dark:#a07d45;--text-main:#f0f0f0;--text-light:#aaa;--card-bg:#1c1c1c;--border-color:#2a2a2a;--header-bg:rgba(13,13,13,.98);--header-text:#f0f0f0;}
-*{margin:0;padding:0;box-sizing:border-box;outline:none;}
-body{font-family:var(--font-ar);background-color:var(--bg-body);color:var(--text-main);overflow-x:hidden;scroll-behavior:smooth;transition:background-color .4s,color .4s;min-height:100vh;}
-a{text-decoration:none;color:inherit;}img{max-width:100%;display:block;}
-.svg-icon{width:24px;height:24px;fill:currentColor;display:inline-block;vertical-align:middle;}
-.palestine-stripe{height:4px;width:100%;background:linear-gradient(to right,var(--pal-black) 33%,var(--white) 33%,var(--white) 66%,var(--pal-green) 66%);position:relative;z-index:1001;}
-.palestine-stripe::before{content:'';position:absolute;top:0;left:0;width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:15px solid var(--pal-red);}
-header{background:var(--header-bg);backdrop-filter:blur(10px);color:var(--header-text);position:sticky;top:4px;z-index:1000;border-bottom:1px solid var(--border-color);transition:var(--transition);}
-.top-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 5%;max-width:1500px;margin:0 auto;flex-wrap:wrap;gap:10px;}
-.logo-area{display:flex;align-items:center;gap:15px;cursor:pointer;}
-.logo-square{width:50px;height:50px;border-radius:12px;border:2px solid var(--gold);padding:4px;background:var(--white);display:flex;justify-content:center;align-items:center;overflow:hidden;}
-.logo-square img{width:100%;height:100%;object-fit:contain;}
-.logo-text h1{font-size:20px;font-weight:900;line-height:1;letter-spacing:1px;color:var(--header-text);}
-.nav-links{display:flex;gap:25px;font-size:15px;font-weight:600;}
-.nav-links a{position:relative;transition:var(--transition);color:var(--header-text);opacity:.8;}
-.nav-links a::after{content:'';position:absolute;bottom:-6px;left:0;width:0;height:1px;background:var(--gold);transition:var(--transition);}
-.nav-links a:hover{opacity:1;color:var(--gold);}.nav-links a:hover::after{width:100%;}
-.header-actions{display:flex;align-items:center;gap:12px;}
-.theme-toggle{background:none;border:1px solid var(--border-color);color:var(--header-text);cursor:pointer;width:38px;height:38px;border-radius:50%;display:flex;justify-content:center;align-items:center;transition:var(--transition);}
-.theme-toggle:hover{border-color:var(--gold);color:var(--gold);transform:rotate(15deg);}
-.lang-switch{display:flex;gap:5px;background:rgba(0,0,0,.05);padding:4px 8px;border-radius:30px;font-size:12px;border:1px solid var(--border-color);}
-body.dark-mode .lang-switch{background:rgba(255,255,255,.05);}
-.lang-switch span{padding:3px 8px;border-radius:20px;transition:var(--transition);color:var(--text-light);font-weight:600;cursor:pointer;}
-.lang-switch span.active{background:var(--gold);color:#0f0f0f;}
-.cart-btn{position:relative;cursor:pointer;background:var(--gold);color:#0f0f0f;padding:8px 15px;border-radius:4px;font-weight:700;display:flex;align-items:center;gap:8px;transition:var(--transition);border:1px solid var(--gold);font-size:14px;}
-.cart-btn:hover{background:transparent;color:var(--gold);}
-.cart-count{background:#0f0f0f;color:var(--gold);border-radius:50%;width:20px;height:20px;display:flex;justify-content:center;align-items:center;font-size:11px;font-weight:bold;}
-.hero{position:relative;height:95vh;min-height:600px;background:linear-gradient(135deg,rgba(8,8,8,.85) 0%,rgba(15,15,15,.6) 50%,rgba(40,30,20,.8) 100%),url('https://images.unsplash.com/photo-1590496793901-1043e0c19872?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 5%;overflow:hidden;}
-.hero-wave{position:absolute;bottom:-2px;left:0;width:100%;height:120px;pointer-events:none;}
-.hero-wave svg{width:100%;height:100%;display:block;}.hero-wave path{fill:var(--bg-body);transition:fill .4s;}
-.hero-content{max-width:900px;color:var(--white);animation:fadeUp 1.5s ease forwards;position:relative;z-index:2;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(50px);}to{opacity:1;transform:translateY(0);}}
-.hero-logo-wrapper{margin-bottom:20px;display:inline-block;}
-.hero-logo-square{width:120px;height:120px;border-radius:20px;border:3px solid var(--gold);padding:8px;background:rgba(255,255,255,.1);backdrop-filter:blur(5px);display:flex;justify-content:center;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.5);}
-.hero-logo-square img{width:100%;height:100%;object-fit:contain;border-radius:12px;}
-.hero-content h2{font-size:55px;font-weight:900;line-height:1.3;margin-bottom:20px;background:linear-gradient(to right,#f5d77e,#d4af37,#f5d77e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-shadow:0 4px 15px rgba(0,0,0,.3);}
-.hero-content p{font-size:20px;margin-bottom:40px;color:#eee;font-weight:300;letter-spacing:1px;max-width:700px;margin-left:auto;margin-right:auto;line-height:1.8;text-shadow:0 2px 4px rgba(0,0,0,.5);}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 40%,#3a2a2a 70%,#4a1a1a 100%);color:var(--white);padding:16px 45px;border-radius:50px;font-weight:700;font-size:16px;transition:var(--transition);border:1px solid var(--gold);cursor:pointer;text-transform:uppercase;letter-spacing:2px;box-shadow:0 8px 25px rgba(0,0,0,.5);}
-.btn-primary:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(201,168,128,.3);border-color:var(--gold-light);}
-.products-section{padding:60px 5% 100px;max-width:1500px;margin:0 auto;}
-.section-title{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;border-bottom:1px solid var(--border-color);padding-bottom:15px;flex-wrap:wrap;gap:10px;}
-.section-title h2{font-size:30px;font-weight:900;color:var(--text-main);}.section-title h2 span{color:var(--gold);}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:30px;}
-.product-card{background:var(--card-bg);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.04);transition:var(--transition);border:1px solid var(--border-color);display:flex;flex-direction:column;}
-.product-card:hover{box-shadow:0 20px 50px rgba(0,0,0,.1);transform:translateY(-8px);border-color:var(--gold-dark);}
-.product-img{position:relative;height:280px;background:#f9f9f9;overflow:hidden;}
-.product-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease;}
-.product-card:hover .product-img img{transform:scale(1.08);}
-.discount-badge{position:absolute;top:12px;right:12px;background:var(--pal-red);color:#fff;padding:5px 12px;border-radius:20px;font-weight:800;font-size:12px;box-shadow:0 4px 12px rgba(206,17,38,.5);z-index:2;}
-html[dir="rtl"] .discount-badge{right:auto;left:12px;}
-.stock-badge{position:absolute;top:12px;left:12px;background:#333;color:#fff;padding:5px 10px;border-radius:20px;font-weight:700;font-size:11px;z-index:2;}
-html[dir="rtl"] .stock-badge{left:auto;right:12px;}
-.product-info{padding:20px;display:flex;flex-direction:column;flex-grow:1;}
-.product-title{font-size:17px;font-weight:700;margin-bottom:10px;color:var(--text-main);line-height:1.5;}
-.product-desc{font-size:13px;color:var(--text-light);margin-bottom:12px;line-height:1.6;}
-.product-price{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
-.price-final{font-size:20px;font-weight:900;color:var(--gold);}
-.price-old{font-size:14px;color:#bbb;text-decoration:line-through;}
-.add-to-cart{width:100%;background:var(--text-main);color:var(--bg-body);border:1px solid var(--text-main);padding:14px;border-radius:8px;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:var(--transition);margin-top:auto;display:flex;justify-content:center;align-items:center;gap:8px;}
-.add-to-cart:hover{background:var(--gold);color:#0f0f0f;border-color:var(--gold);}
-.remind-btn{background:#444;color:#fff;border-color:#444;}
-.remind-btn:hover{background:var(--pal-red);border-color:var(--pal-red);color:#fff;}
-.page-section{padding:80px 5%;background:var(--bg-section);border-top:1px solid var(--border-color);border-bottom:1px solid var(--border-color);transition:background .4s;}
-.about-container{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;max-width:1200px;margin:0 auto;}
-.about-img{border-radius:20px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.1);border:1px solid var(--border-color);}
-.about-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
-.about-img:hover img{transform:scale(1.05);}
-.about-text{text-align:left;}
-html[dir="rtl"] .about-text{text-align:right;}
-.contact-container{max-width:1200px;margin:0 auto;text-align:center;}
-.contact-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;margin-top:50px;}
-.contact-card{background:var(--card-bg);padding:40px 30px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.04);transition:var(--transition);border:1px solid var(--border-color);text-decoration:none;color:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.contact-card:hover{transform:translateY(-8px);border-color:var(--gold-dark);box-shadow:0 20px 40px rgba(201,169,110,.1);}
-.contact-card h4{font-size:19px;margin:15px 0 8px;font-weight:700;color:var(--text-main);}
-.contact-card p{color:var(--text-light);font-size:15px;font-weight:600;}
-.payment-section{margin-top:60px;text-align:center;padding:40px;background:var(--card-bg);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.03);border:1px solid var(--border-color);max-width:800px;margin-left:auto;margin-right:auto;}
-.payment-section h3{font-size:24px;font-weight:800;color:var(--gold);margin-bottom:15px;}
-.payment-section p{font-size:16px;color:var(--text-light);margin-bottom:20px;}
-.bank-details{display:flex;flex-direction:column;gap:15px;text-align:right;}
-html[dir="ltr"] .bank-details{text-align:left;}
-.bank-item{background:var(--bg-body);padding:15px 20px;border-radius:10px;border:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;font-size:15px;gap:10px;flex-wrap:wrap;}
-.bank-item strong{color:var(--text-main);font-weight:700;}
-.bank-item span{color:var(--gold-dark);font-family:monospace;font-size:16px;letter-spacing:1px;direction:ltr;}
-.copy-btn{background:var(--gold);color:#0f0f0f;border:none;padding:8px 15px;border-radius:6px;cursor:pointer;font-weight:bold;font-family:inherit;transition:var(--transition);}
-.copy-btn:hover{background:var(--gold-dark);}
-footer{background:var(--bg-section);color:var(--text-main);padding:40px 5% 20px;text-align:center;border-top:1px solid var(--border-color);transition:background .4s;}
-.footer-content{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:15px;}
-.footer-art{display:flex;gap:20px;align-items:center;justify-content:center;margin-bottom:10px;}
-.footer-links{display:flex;gap:25px;flex-wrap:wrap;justify-content:center;}
-.footer-links a{color:var(--text-light);font-size:14px;transition:.3s;}
-.footer-links a:hover{color:var(--gold);}
-.footer-content p{color:var(--text-light);font-size:14px;}
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1001;opacity:0;visibility:hidden;transition:all .4s ease;backdrop-filter:blur(5px);}
-.cart-overlay.active{opacity:1;visibility:visible;}
-.cart-sidebar{position:fixed;top:0;left:-450px;width:420px;max-width:100%;height:100%;background:var(--card-bg);z-index:1002;box-shadow:-10px 0 40px rgba(0,0,0,.15);transition:left .4s ease;display:flex;flex-direction:column;border-right:1px solid var(--border-color);}
-.cart-sidebar.active{left:0;}
-html[dir="rtl"] .cart-sidebar{left:auto;right:-450px;transition:right .4s ease;border-left:1px solid var(--border-color);border-right:none;}
-html[dir="rtl"] .cart-sidebar.active{right:0;}
-.cart-header{display:flex;justify-content:space-between;align-items:center;padding:25px;border-bottom:1px solid var(--border-color);}
-.cart-header h3{font-size:20px;font-weight:900;color:var(--text-main);}
-.close-cart{font-size:30px;cursor:pointer;color:var(--text-light);transition:var(--transition);line-height:1;}
-.close-cart:hover{color:var(--text-main);transform:rotate(90deg);}
-.cart-items{flex-grow:1;overflow-y:auto;padding:25px;}
-.empty-cart-msg{text-align:center;color:var(--text-light);margin-top:50px;font-size:15px;}
-.cart-item{display:flex;align-items:center;gap:15px;margin-bottom:20px;border-bottom:1px solid var(--border-color);padding-bottom:15px;}
-.cart-item img{width:70px;height:70px;object-fit:cover;border-radius:8px;}
-.cart-item-details{flex-grow:1;text-align:left;}
-html[dir="rtl"] .cart-item-details{text-align:right;}
-.cart-item-title{font-size:14px;font-weight:700;margin-bottom:5px;color:var(--text-main);}
-.cart-item-price{font-size:15px;color:var(--gold);font-weight:900;}
-.qty-controls{display:flex;align-items:center;gap:10px;margin-top:8px;}
-.qty-btn{width:28px;height:28px;border:1px solid var(--border-color);background:var(--bg-section);color:var(--text-main);cursor:pointer;border-radius:6px;font-weight:bold;transition:var(--transition);display:flex;align-items:center;justify-content:center;font-family:inherit;}
-.qty-btn:hover{background:var(--gold);color:#0f0f0f;border-color:var(--gold);}
-.qty-val{font-size:14px;font-weight:bold;width:20px;text-align:center;color:var(--text-main);}
-.remove-item{color:var(--pal-red);cursor:pointer;margin-inline-start:auto;background:none;border:none;padding:4px;}
-.cart-footer{padding:25px;border-top:1px solid var(--border-color);background:var(--bg-body);}
-.cart-subtotal,.cart-discount,.cart-total{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px;color:var(--text-light);}
-.cart-discount{color:var(--pal-red);font-weight:700;}
-.cart-total{font-size:18px;font-weight:900;margin:12px 0 20px;color:var(--text-main);padding-top:12px;border-top:2px dashed var(--border-color);}
-.checkout-btn{width:100%;padding:16px;background:var(--gold);color:#0f0f0f;border:none;border-radius:8px;font-size:16px;font-weight:bold;cursor:pointer;transition:.3s;font-family:inherit;}
-.checkout-btn:hover{background:var(--text-main);color:var(--bg-body);}
-.checkout-modal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:2000;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:.4s;backdrop-filter:blur(6px);padding:20px;}
-.checkout-modal.active{opacity:1;visibility:visible;}
-.modal-content{background:var(--card-bg);padding:40px;border-radius:16px;width:90%;max-width:550px;max-height:90vh;overflow-y:auto;position:relative;border:1px solid var(--border-color);}
-.modal-content h3{margin-bottom:25px;font-size:26px;font-weight:900;color:var(--gold);}
-.form-group{margin-bottom:15px;text-align:left;}
-html[dir="rtl"] .form-group{text-align:right;}
-.form-group label{display:block;margin-bottom:8px;font-size:14px;font-weight:700;color:var(--text-main);}
-.form-group input,.form-group textarea{width:100%;padding:14px;border:1px solid var(--border-color);border-radius:8px;font-family:inherit;font-size:14px;background:var(--bg-section);color:var(--text-main);}
-.form-group input:focus,.form-group textarea:focus{border-color:var(--gold);}
-.submit-order-btn{width:100%;padding:16px;background:var(--gold);color:#0f0f0f;border:none;border-radius:8px;font-size:16px;font-weight:900;cursor:pointer;margin-top:15px;font-family:inherit;}
-.submit-order-btn:disabled{opacity:.6;cursor:not-allowed;}
-.toast-notification{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--card-bg);color:var(--text-main);padding:15px 35px;border-radius:50px;font-size:15px;font-weight:bold;z-index:3000;opacity:0;transition:all .5s ease;border:1px solid var(--gold);box-shadow:0 10px 30px rgba(0,0,0,.2);}
-.toast-notification.show{transform:translateX(-50%) translateY(0);opacity:1;}
-@media(max-width:1024px){.nav-links{display:none;}.hero-content h2{font-size:40px;}.about-container{grid-template-columns:1fr;}}
-@media(max-width:768px){.hero-content h2{font-size:32px;}.hero-logo-square{width:100px;height:100px;}.contact-cards{grid-template-columns:1fr;}.bank-item{flex-direction:column;gap:10px;text-align:center;}}
-@media(max-width:480px){.products-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.product-img{height:160px;}.product-info{padding:12px;}.product-title{font-size:13px;}.price-final{font-size:15px;}.add-to-cart{font-size:12px;padding:10px;}.cart-btn span:not(.cart-count){display:none;}}
+:root{--bg:#f7f4ee;--sec:#fff;--gold:#b89558;--gold-d:#8a6a3a;--txt:#1a1a1a;--muted:#666;--card:#fff;--bd:#e0e0e0;--red:#ce1126;--grn:#007a3d;--blk:#000;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;}
+body{background:var(--bg);color:var(--txt);line-height:1.7;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+.palestine-stripe{height:4px;width:100%;background:linear-gradient(to right,var(--blk) 33%,#fff 33%,#fff 66%,var(--grn) 66%);position:relative;}
+.palestine-stripe::before{content:'';position:absolute;top:0;left:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:15px solid var(--red);}
+header{background:var(--sec);position:sticky;top:0;z-index:1000;border-bottom:1px solid var(--bd);}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:15px 5%;max-width:1400px;margin:0 auto;}
+.logo{font-size:24px;font-weight:900;color:var(--txt);}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;gap:20px;font-weight:700;}
+.nav-links a:hover{color:var(--gold);}
+.nav-actions{display:flex;gap:10px;align-items:center;}
+.lang-sw{display:flex;gap:5px;}
+.lang-sw span{padding:5px 10px;border-radius:20px;background:#eee;cursor:pointer;font-size:12px;font-weight:700;}
+.lang-sw span.active{background:var(--gold);color:#fff;}
+.cart-btn{background:var(--gold);color:#fff;padding:10px 20px;border-radius:30px;font-weight:800;cursor:pointer;border:none;}
+.hero{background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),url('https://images.unsplash.com/photo-1590496793901-1043e0c19872?q=80&w=1920') center/cover;color:#fff;text-align:center;padding:150px 20px;min-height:70vh;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+.hero h1{font-size:clamp(40px,6vw,70px);font-weight:900;margin-bottom:20px;}
+.hero h1 span{color:var(--gold);}
+.hero p{font-size:20px;max-width:600px;margin-bottom:30px;}
+.btn-shop{background:var(--gold);color:#fff;padding:15px 40px;border-radius:50px;font-weight:800;font-size:18px;border:none;cursor:pointer;transition:0.3s;}
+.btn-shop:hover{background:var(--gold-d);transform:translateY(-3px);}
+.sec{padding:80px 5%;max-width:1400px;margin:0 auto;}
+.title{text-align:center;font-size:36px;font-weight:900;margin-bottom:40px;}
+.title span{color:var(--gold);}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:25px;}
+.pcard{background:var(--card);border-radius:15px;overflow:hidden;border:1px solid var(--bd);transition:0.3s;}
+.pcard:hover{transform:translateY(-10px);box-shadow:0 15px 30px rgba(0,0,0,0.1);}
+.pimg{height:260px;position:relative;}
+.pimg img{width:100%;height:100%;object-fit:cover;}
+.badge{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;padding:5px 10px;border-radius:20px;font-weight:800;font-size:12px;}
+.pinfo{padding:20px;text-align:center;}
+.ptitle{font-size:18px;font-weight:800;margin-bottom:10px;}
+.pprice{font-size:22px;font-weight:900;color:var(--gold);margin-bottom:15px;}
+.pbtn{width:100%;padding:12px;border-radius:10px;border:none;background:var(--txt);color:#fff;font-weight:800;cursor:pointer;transition:0.3s;}
+.pbtn:hover{background:var(--gold);}
+.about{background:var(--sec);padding:80px 5%;text-align:center;}
+.about p{max-width:800px;margin:0 auto 20px;font-size:18px;color:var(--muted);}
+footer{background:var(--blk);color:#888;text-align:center;padding:40px;}
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;display:none;}
+.cart-overlay.on{display:block;}
+.cart{position:fixed;top:0;right:-400px;width:400px;height:100%;background:var(--sec);z-index:1001;transition:0.4s;display:flex;flex-direction:column;}
+.cart.on{right:0;}
+.cart-head{padding:20px;background:var(--txt);color:#fff;display:flex;justify-content:space-between;}
+.cart-body{flex:1;overflow-y:auto;padding:20px;}
+.cart-item{display:flex;gap:10px;margin-bottom:15px;border-bottom:1px solid var(--bd);padding-bottom:10px;}
+.cart-item img{width:60px;height:60px;border-radius:8px;object-fit:cover;}
+.cart-foot{padding:20px;background:#f9f9f9;border-top:1px solid var(--bd);}
+.total-line{display:flex;justify-content:space-between;margin-bottom:10px;font-weight:700;}
+.checkout-btn{width:100%;padding:15px;background:var(--gold);color:#fff;border:none;border-radius:10px;font-weight:900;cursor:pointer;}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;display:none;align-items:center;justify-content:center;}
+.modal.on{display:flex;}
+.modal-box{background:var(--sec);padding:30px;border-radius:15px;width:90%;max-width:500px;}
+.modal-box input{width:100%;padding:12px;margin-bottom:10px;border:1px solid var(--bd);border-radius:8px;font-family:inherit;}
+@media(max-width:768px){.nav-links{display:none;}.products-grid{grid-template-columns:repeat(2,1fr);}.cart{width:100%;}}
 </style>
 </head>
 <body>
+
 <div class="palestine-stripe"></div>
+
 <header>
-  <div class="top-bar">
-    <div class="logo-area" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <div class="logo-square"><img src="https://scontent.cdninstagram.com/v/t51.82787-19/863421837_17962082517014176_4606145947217586420_n.jpg" alt="Logo" onerror="this.style.display='none'"></div>
-      <div class="logo-text"><h1 id="brand-name">Miraç</h1></div>
+  <div class="nav">
+    <div class="logo">Miraç <span>معراج</span></div>
+    <div class="nav-links">
+      <a href="#products" data-key="nav1">Ürünler</a>
+      <a href="#about" data-key="nav2">Hakkımızda</a>
     </div>
-    <nav class="nav-links">
-      <a href="#" data-key="nav-home">Ana Sayfa</a>
-      <a href="#products" data-key="nav-products">Ürünler</a>
-      <a href="#about" data-key="nav-about">Hakkımızda</a>
-      <a href="#contact" data-key="nav-contact">İletişim</a>
-    </nav>
-    <div class="header-actions">
-      <button class="theme-toggle" onclick="toggleTheme()" title="Tema">
-        <svg id="theme-icon" class="svg-icon" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/></svg>
-      </button>
-      <div class="lang-switch">
-        <span onclick="changeLang('ar')">AR</span>
-        <span onclick="changeLang('en')">EN</span>
-        <span class="active" onclick="changeLang('tr')">TR</span>
+    <div class="nav-actions">
+      <div class="lang-sw">
+        <span onclick="setLang('ar')">AR</span>
+        <span onclick="setLang('en')">EN</span>
+        <span class="active" onclick="setLang('tr')">TR</span>
       </div>
-      <div class="cart-btn" onclick="toggleCart()">
-        <svg class="svg-icon" viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-        <span data-key="nav-cart">Sepet</span>
-        <span class="cart-count">0</span>
-      </div>
+      <button class="cart-btn" onclick="toggleCart(true)">🛒 <span data-key="cart">Sepet</span> (<span id="cartCount">0</span>)</button>
     </div>
   </div>
 </header>
+
 <section class="hero">
-  <div class="hero-content">
-    <div class="hero-logo-wrapper">
-      <div class="hero-logo-square"><img src="https://scontent.cdninstagram.com/v/t51.82787-19/863421837_17962082517014176_4606145947217586420_n.jpg" alt="Miraj Logo" onerror="this.style.display='none'"></div>
-    </div>
-    <h2 data-key="hero-title">Bir vatana benzeyen<br>bir parça.</h2>
-    <p data-key="hero-desc">Onu taktığınızda, unutulmaz bir toprağın hatırasını taşırsınız. Sadece süs değil... kimlik.</p>
-    <a href="#products" class="btn-primary" data-key="hero-btn">Şimdi Al</a>
-  </div>
-  <div class="hero-wave"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C320,120 640,0 960,64 C1280,128 1440,32 1440,32 L1440,120 L0,120 Z"></path></svg></div>
+  <h1 data-key="hero1">Bir vatana benzeyen<br><span>bir parça.</span></h1>
+  <p data-key="hero2">Onu taktığınızda, unutulmaz bir toprağın hatırasını taşırsınız. Sadece süs değil... kimlik.</p>
+  <button class="btn-shop" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})" data-key="shopNow">Şimdi Al</button>
 </section>
-<section class="products-section" id="products">
-  <div class="section-title"><h2 data-key="latest-products">En Yeni <span>Ürünler</span></h2></div>
-  <div class="products-grid" id="productsGrid"></div>
+
+<section class="sec" id="products">
+  <h2 class="title" data-key="latest">En Yeni <span>Ürünler</span></h2>
+  <div class="products-grid" id="grid"></div>
 </section>
-<section id="about" class="page-section">
-  <div class="about-container">
-    <div class="about-img"><img src="https://images.unsplash.com/photo-1542186054-4d5d8e60829b?q=80&w=1000" alt="Palestine"></div>
-    <div class="about-text">
-      <h2 data-key="about-title" style="font-size:38px;font-weight:900;margin-bottom:25px;color:var(--text-main);">Hakkımızda <span style="color:var(--gold)">Biz</span></h2>
-      <p data-key="about-p1" style="font-size:16px;line-height:1.9;color:var(--text-light);margin-bottom:20px;"></p>
-      <p data-key="about-p2" style="font-size:16px;line-height:1.9;color:var(--text-light);"></p>
-    </div>
-  </div>
+
+<section class="about" id="about">
+  <h2 class="title" data-key="aboutTitle">Biz <span>Kimiz?</span></h2>
+  <p data-key="about1">Miraç, Filistin ile Türkiye arasında bir köprüdür. Her parçamız bir mesaj, kimlik ve hatıradır.</p>
+  <p data-key="about2">Kudüs'ün kalbinden kalbinize, Filistin mirasından ilham alan ürünler.</p>
 </section>
-<section id="contact" class="page-section" style="background:var(--bg-body);">
-  <div class="contact-container">
-    <h2 data-key="contact-title" style="font-size:36px;font-weight:900;margin-bottom:15px;color:var(--text-main);">Bize <span style="color:var(--gold)">Ulaşın</span></h2>
-    <p data-key="contact-desc" style="color:var(--text-light);font-size:16px;"></p>
-    <div class="contact-cards">
-      <a href="https://www.instagram.com/mirac.store.tr" target="_blank" class="contact-card">
-        <svg viewBox="0 0 24 24" width="50" height="50"><defs><linearGradient id="ig-gradient" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stop-color="#f09433"/><stop offset="25%" stop-color="#e6683c"/><stop offset="50%" stop-color="#dc2743"/><stop offset="75%" stop-color="#cc2366"/><stop offset="100%" stop-color="#bc1888"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig-gradient)"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff"/></svg>
-        <h4>Instagram</h4><p>@mirac.store.tr</p>
-      </a>
-      <a href="https://wa.me/905000000000" target="_blank" class="contact-card">
-        <svg viewBox="0 0 24 24" width="50" height="50"><circle cx="12" cy="12" r="11" fill="#25D366"/><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.6.1-.2.3-.7.8-.8.9-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.8-.8-1.4-1.7-1.5-2-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4 0 1.4 1 2.7 1.2 2.9.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4 0-.1-.1-.2-.2-.2z" fill="#fff"/></svg>
-        <h4>WhatsApp</h4><p>+90 500 000 00 00</p>
-      </a>
-    </div>
-    <div class="payment-section" id="payment">
-      <h3 data-key="payment-title">Kuveyt Bankası ile Ödeme</h3>
-      <p data-key="payment-desc"></p>
-      <div class="bank-details">
-        <div class="bank-item"><strong data-key="bank-owner">Hesap Sahibi:</strong><span>Miraç Ticaret</span></div>
-        <div class="bank-item"><strong data-key="bank-iban">IBAN:</strong><span id="iban-text">TR00 0000 0000 0000 0000 0000 00</span><button class="copy-btn" onclick="copyIban()" data-key="bank-copy">Kopyala</button></div>
-      </div>
-    </div>
-  </div>
-</section>
-<footer>
-  <div class="footer-content">
-    <div class="footer-art">
-      <svg viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="70" width="60" height="30" fill="#007a3d" rx="2"/><rect x="25" y="60" width="50" height="10" fill="#007a3d" /><rect x="30" y="55" width="40" height="5" fill="#007a3d" /><path d="M35 55 Q50 20 65 55 Z" fill="#d4af37" /><circle cx="50" cy="20" r="3" fill="#d4af37" /></svg>
-    </div>
-    <div class="footer-links">
-      <a href="#" data-key="nav-home">Ana Sayfa</a><a href="#products" data-key="nav-products">Ürünler</a><a href="#about" data-key="nav-about">Hakkımızda</a><a href="#contact" data-key="nav-contact">İletişim</a>
-    </div>
-    <p>© 2026 <span id="footer-brand">Miraç</span> | <span data-key="footer-rights">Tüm hakları saklıdır.</span></p>
-    <p style="color:var(--gold);" data-key="footer-love">Filistin kalbimizde yaşayacak</p>
-  </div>
-</footer>
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-sidebar" id="cartSidebar">
-  <div class="cart-header"><h3 data-key="cart-title">Alışveriş Sepeti</h3><span class="close-cart" onclick="toggleCart()">&times;</span></div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-footer">
-    <div class="cart-subtotal"><span data-key="cart-subtotal">Ara Toplam:</span><span id="cartSubtotal">₺ 0.00</span></div>
-    <div class="cart-discount" id="cartDiscountRow" style="display:none;"><span data-key="cart-discount">İndirim:</span><span id="cartDiscount">- ₺ 0.00</span></div>
-    <div class="cart-total"><span data-key="cart-total-text">Toplam:</span><span id="cartTotal">₺ 0.00</span></div>
-    <button class="checkout-btn" onclick="openCheckout()" data-key="checkout-btn">Ödemeye Geç</button>
-  </div>
+
+<footer>© 2026 Miraç — 🇵🇸</footer>
+
+<div class="cart-overlay" id="overlay" onclick="toggleCart(false)"></div>
+<div class="cart" id="cartSidebar">
+  <div class="cart-head"><h3 data-key="cart">Sepet</h3><button onclick="toggleCart(false)" style="background:none;border:none;color:#fff;font-size:20px;">✕</button></div>
+  <div class="cart-body" id="cartBody"></div>
+  <div class="cart-foot" id="cartFoot"></div>
 </div>
-<div class="checkout-modal" id="checkoutModal">
-  <div class="modal-content">
-    <span class="close-cart" style="position:absolute;top:25px;left:25px;" onclick="closeCheckout()">&times;</span>
-    <h3 data-key="modal-title">Ödeme</h3>
-    <p style="font-size:14px;color:var(--text-light);margin-bottom:20px;" data-key="modal-desc"></p>
+
+<div class="modal" id="checkoutModal">
+  <div class="modal-box">
+    <h3 style="margin-bottom:20px;">Sipariş / إتمام الطلب</h3>
     <form id="orderForm">
-      <div class="form-group"><label data-key="lbl-name">Ad Soyad</label><input type="text" id="custName" required></div>
-      <div class="form-group"><label data-key="lbl-phone">Telefon Numarası</label><input type="tel" id="custPhone" required></div>
-      <div class="form-group"><label data-key="lbl-city">Şehir</label><input type="text" id="custCity" required></div>
-      <div class="form-group"><label data-key="lbl-address">Detaylı Adres</label><input type="text" id="custAddress" required></div>
-      <button type="submit" class="submit-order-btn" data-key="btn-confirm">Siparişi Onayla</button>
+      <input type="text" id="fName" placeholder="Ad Soyad / الاسم" required>
+      <input type="tel" id="fPhone" placeholder="Telefon / الهاتف" required>
+      <input type="text" id="fCity" placeholder="Şehir / المدينة" required>
+      <input type="text" id="fAddr" placeholder="Adres / العنوان" required>
+      <button type="submit" class="checkout-btn" style="margin-top:10px;">تأكيد الطلب / Onayla</button>
+      <button type="button" onclick="document.getElementById('checkoutModal').classList.remove('on')" style="width:100%;margin-top:10px;background:none;border:none;color:var(--red);font-weight:700;cursor:pointer;">إلغاء / İptal</button>
     </form>
   </div>
 </div>
-<div class="toast-notification" id="toast"></div>
+
 <script>
-const firebaseConfig={apiKey:"AIzaSyC0-EP2Bi-zFZFMZIducA-HiEP8gr8Q6tI",authDomain:"miraj-new.firebaseapp.com",projectId:"miraj-new",storageBucket:"miraj-new.firebasestorage.app",messagingSenderId:"817739704878",appId:"1:817739704878:web:0d3c0d6e1f80ab8a784dbf",measurementId:"G-PRNXM8DMC2"};
-firebase.initializeApp(firebaseConfig);const db=firebase.firestore();
-let currentLang="tr",cart=JSON.parse(localStorage.getItem("miracCart"))||[],productsData=[];
-const translations={
-ar:{"nav-home":"الرئيسية","nav-products":"المنتجات","nav-about":"من نحن","nav-contact":"تواصل","nav-cart":"السلة","hero-title":"قطعةٌ تُشبه وطنًا..<br>لا يغيب.","hero-desc":"حين ترتديها، فأنت تحمل معك ذاكرة أرضٍ لا تُنسى. ليست زينة... بل هوية.","hero-btn":"تسوق الآن","latest-products":"أحدث <span>المنتجات</span>","about-title":"من <span style='color:var(--gold)'>نحن</span>","about-p1":"معراج هو جسر يربط بين فلسطين وتركيا. نحن نؤمن أن كل قطعة نصنعها أو نختارها بعناية هي أكثر من مجرد زينة؛ إنها رسالة، وهويات، وذاكرة أرض لا تُنسى.","about-p2":"نقدم لكم منتجات مستوحاة من التراث الفلسطيني العريق، من قلب القدس إلى قلبكم.","contact-title":"تواصل <span style='color:var(--gold)'>معنا</span>","contact-desc":"نسعد بتواصلكم معنا في أي وقت.","payment-title":"الدفع عبر بنك الكويت","payment-desc":"نوفر خيار الدفع الآمن والموثوق.","bank-owner":"اسم صاحب الحساب:","bank-iban":"رقم الآيبان (IBAN):","bank-copy":"نسخ","cart-title":"سلة التسوق","cart-subtotal":"المجموع الفرعي:","cart-discount":"الخصم:","cart-total-text":"الإجمالي:","checkout-btn":"إتمام الطلب","modal-title":"إتمام الطلب","modal-desc":"يرجى إدخال بياناتك بالكامل لتأكيد الطلب.","lbl-name":"الاسم الكامل","lbl-phone":"رقم الهاتف","lbl-city":"المدينة","lbl-address":"العنوان بالتفصيل","btn-confirm":"تأكيد الطلب","empty-cart":"سلة التسوق فارغة حالياً.","added-to-cart":"تمت الإضافة إلى السلة!","order-received":"تم استلام طلبك بنجاح! شكراً لك.","add-to-cart-btn":"أضف إلى السلة","remind-btn":"ذكّرني عند التوفر","out-of-stock":"غير متوفر","footer-rights":"جميع الحقوق محفوظة.","footer-love":"فلسطين ستبقى في قلوبنا","brand":"معراج","no-products":"لا توجد منتجات بعد","loading":"جاري التحميل...","fill-fields":"يرجى ملء جميع الحقول","order-error":"فشل إرسال الطلب، حاول مجدداً","reminder-saved":"سنذكرك عند التوفر!","reminder-email":"أدخل بريدك الإلكتروني:","bank-copied":"تم نسخ الآيبان!"},
-en:{"nav-home":"Home","nav-products":"Products","nav-about":"About Us","nav-contact":"Contact","nav-cart":"Cart","hero-title":"A piece that resembles<br>a homeland.","hero-desc":"When you wear it, you carry the memory of an unforgettable land. Not just decoration... but identity.","hero-btn":"Shop Now","latest-products":"Latest <span>Products</span>","about-title":"About <span style='color:var(--gold)'>Us</span>","about-p1":"Miraj is a bridge between Palestine and Turkey. We believe every piece we craft is more than just decoration; it is a message, an identity, and the memory of an unforgettable land.","about-p2":"We offer products inspired by the rich Palestinian heritage, from the heart of Jerusalem to your heart.","contact-title":"Contact <span style='color:var(--gold)'>Us</span>","contact-desc":"We are happy to hear from you anytime.","payment-title":"Payment via Kuwait Bank","payment-desc":"We provide a safe and secure payment option via Kuwait Bank for a comfortable shopping experience.","bank-owner":"Account Owner:","bank-iban":"IBAN:","bank-copy":"Copy","cart-title":"Shopping Cart","cart-subtotal":"Subtotal:","cart-discount":"Discount:","cart-total-text":"Total:","checkout-btn":"Checkout","modal-title":"Checkout","modal-desc":"Please enter your full details to confirm the order.","lbl-name":"Full Name","lbl-phone":"Phone Number","lbl-city":"City","lbl-address":"Detailed Address","btn-confirm":"Confirm Order","empty-cart":"Your cart is currently empty.","added-to-cart":"Added to cart!","order-received":"Order received successfully! Thank you.","add-to-cart-btn":"Add to Cart","remind-btn":"Notify Me","out-of-stock":"Out of Stock","footer-rights":"All rights reserved.","footer-love":"Palestine will remain in our hearts","brand":"Miraj","no-products":"No products yet","loading":"Loading...","fill-fields":"Please fill all fields","order-error":"Failed to submit, please retry","reminder-saved":"We will remind you when available!","reminder-email":"Enter your email:","bank-copied":"IBAN Copied!"},
-tr:{"nav-home":"Ana Sayfa","nav-products":"Ürünler","nav-about":"Hakkımızda","nav-contact":"İletişim","nav-cart":"Sepet","hero-title":"Bir vatana benzeyen<br>bir parça.","hero-desc":"Onu taktığınızda, unutulmaz bir toprağın hatırasını taşırsınız. Sadece süs değil... kimlik.","hero-btn":"Şimdi Al","latest-products":"En Yeni <span>Ürünler</span>","about-title":"Hakkımızda <span style='color:var(--gold)'>Biz</span>","about-p1":"Miraç, Filistin ile Türkiye arasında bir köprüdür. Ürettiğimiz her parçanın sadece bir süs değil; bir mesaj, bir kimlik ve unutulmaz bir toprağın hatırası olduğuna inanıyoruz.","about-p2":"Kudüs'ün kalbinden sizin kalbinize, zengin Filistin mirasından ilham alan ürünler sunuyoruz.","contact-title":"Bize <span style='color:var(--gold)'>Ulaşın</span>","contact-desc":"Her zaman sizinle iletişim kurmaktan mutluluk duyarız.","payment-title":"Kuveyt Bankası ile Ödeme","payment-desc":"Rahat bir alışveriş deneyimi için Kuveyt Bankası üzerinden güvenli ve emniyetli ödeme seçeneği sunuyoruz.","bank-owner":"Hesap Sahibi:","bank-iban":"IBAN:","bank-copy":"Kopyala","cart-title":"Alışveriş Sepeti","cart-subtotal":"Ara Toplam:","cart-discount":"İndirim:","cart-total-text":"Toplam:","checkout-btn":"Ödemeye Geç","modal-title":"Ödeme","modal-desc":"Siparişi onaylamak için lütfen tüm bilgilerinizi girin.","lbl-name":"Ad Soyad","lbl-phone":"Telefon Numarası","lbl-city":"Şehir","lbl-address":"Detaylı Adres","btn-confirm":"Siparişi Onayla","empty-cart":"Sepetiniz şu anda boş.","added-to-cart":"Sepete eklendi!","order-received":"Siparişiniz başarıyla alındı! Teşekkürler.","add-to-cart-btn":"Sepete Ekle","remind-btn":"Gelince Haber Ver","out-of-stock":"Stokta Yok","footer-rights":"Tüm hakları saklıdır.","footer-love":"Filistin kalbimizde yaşayacak","brand":"Miraç","no-products":"Henüz ürün eklenmedi","loading":"Yükleniyor...","fill-fields":"Lütfen tüm alanları doldurun","order-error":"Sipariş gönderilemedi, tekrar deneyin","reminder-saved":"Stok gelince haber vereceğiz!","reminder-email":"E-posta adresinizi girin:","bank-copied":"IBAN Kopyalandı!"}};
-function toggleTheme(){document.body.classList.toggle("dark-mode");const e=document.body.classList.contains("dark-mode");localStorage.setItem("miracTheme",e?"dark":"light");document.getElementById("theme-icon").innerHTML=e?'<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>':'<path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/>'}
-if(localStorage.getItem("miracTheme")==="dark"){document.body.classList.add("dark-mode");document.getElementById("theme-icon").innerHTML='<path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/>'}
-function copyIban(){const e=document.getElementById("iban-text").innerText;navigator.clipboard.writeText(e).then(()=>showToast(translations[currentLang]["bank-copied"]))}
-function changeLang(e){currentLang=e;document.documentElement.dir=e==="ar"?"rtl":"ltr";document.documentElement.lang=e;document.querySelectorAll(".lang-switch span").forEach(s=>s.classList.remove("active"));const t=e==="ar"?1:e==="en"?2:3;document.querySelector(`.lang-switch span:nth-child(${t})`).classList.add("active");document.querySelectorAll("[data-key]").forEach(s=>{const a=s.getAttribute("data-key");translations[e][a]&&(s.tagName==="INPUT"||s.tagName==="TEXTAREA"?s.placeholder=translations[e][a]:s.innerHTML=translations[e][a])});document.getElementById("brand-name").innerText=translations[e]["brand"];document.getElementById("footer-brand").innerText=translations[e]["brand"];renderProducts();renderCart();localStorage.setItem("miracLang",e)}
-function renderProducts(){const e=document.getElementById("productsGrid"),t=translations[currentLang];if(!productsData||productsData.length===0){e.innerHTML=`<p style="text-align:center;grid-column:1/-1;color:var(--text-light);">${t["no-products"]}</p>`;return}e.innerHTML=productsData.map(s=>{const a=parseFloat(s.price)||0,n=parseFloat(s.discount)||0,r=n>0?a*(1-n/100):a,o=s.inStock!==false,l=s.title||s.name||"",c=typeof l==="object"?l[currentLang]||l.tr||l.ar||"":l,d=s.image||"https://via.placeholder.com/400x300?text=Miraç";return`<div class="product-card"><div class="product-img"><img src="${d}" alt="${c}" onerror="this.src='https://via.placeholder.com/400x300?text=Miraç'">${n>0?`<span class="discount-badge">-${n}%</span>`:""}${!o?`<span class="stock-badge">${t["out-of-stock"]}</span>`:""}</div><div class="product-info"><h3 class="product-title">${c}</h3>${s.desc?`<p class="product-desc">${s.desc}</p>`:""}<div class="product-price"><span class="price-final">₺ ${r.toFixed(2)}</span>${n>0?`<span class="price-old">₺ ${a.toFixed(2)}</span>`:""}</div>${o?`<button class="add-to-cart" onclick="addToCart('${s.id}')">🛒 ${t["add-to-cart-btn"]}</button>`:`<button class="add-to-cart remind-btn" onclick="remindMe('${s.id}')">🔔 ${t["remind-btn"]}</button>`}</div></div>`}).join("")}
-function toggleCart(){document.getElementById("cartSidebar").classList.toggle("active");document.getElementById("cartOverlay").classList.toggle("active")}
-function addToCart(e){const t=productsData.find(s=>s.id===e);if(!t)return;const s=parseFloat(t.price)||0,a=parseFloat(t.discount)||0,n=a>0?s*(1-a/100):s,r=t.title||t.name||"",o=typeof r==="object"?r[currentLang]||r.tr||r.ar||"":r,l=cart.find(s=>s.id===e);l?l.qty+=1:cart.push({id:t.id,title:t.title||t.name,price:s,finalPrice:n,discount:a,img:t.image||"",qty:1});saveCart();showToast(translations[currentLang]["added-to-cart"]);document.getElementById("cartSidebar").classList.contains("active")||toggleCart()}
-function saveCart(){localStorage.setItem("miracCart",JSON.stringify(cart));renderCart()}
-function renderCart(){const e=document.getElementById("cartItems"),t=translations[currentLang];let s=0,a=0,n=0,r=0;if(cart.length===0){e.innerHTML=`<p class="empty-cart-msg">${t["empty-cart"]}</p>`;document.getElementById("cartSubtotal").innerText="₺ 0.00";document.getElementById("cartDiscount").innerText="- ₺ 0.00";document.getElementById("cartTotal").innerText="₺ 0.00";document.getElementById("cartDiscountRow").style.display="none";document.querySelector(".cart-count").innerText=0;return}e.innerHTML=cart.map((e,o)=>{const l=e.qty||1,c=parseFloat(e.price)||0,d=parseFloat(e.finalPrice)||c,i=c*l,u=d*l,m=i-u;s+=i;a+=m;n+=u;r+=l;const p=e.title,h=typeof p==="object"?p[currentLang]||p.tr||p.ar||"":p||"";return`<div class="cart-item"><img src="${e.img||"https://via.placeholder.com/70"}" alt="p" onerror="this.src='https://via.placeholder.com/70'"><div class="cart-item-details"><div class="cart-item-title">${h}</div><div class="cart-item-price">₺ ${u.toFixed(2)}${m>0?`<span class="old" style="font-size:11px;color:#bbb;text-decoration:line-through;">₺ ${i.toFixed(2)}</span>`:""}</div><div class="qty-controls"><button class="qty-btn" onclick="updateQty(${o}, -1)">-</button><span class="qty-val">${l}</span><button class="qty-btn" onclick="updateQty(${o}, 1)">+</button><button class="remove-item" onclick="removeItem(${o})">🗑️</button></div></div></div>`}).join("");document.getElementById("cartSubtotal").innerText=`₺ ${s.toFixed(2)}`;document.getElementById("cartDiscount").innerText=`- ₺ ${a.toFixed(2)}`;document.getElementById("cartTotal").innerText=`₺ ${n.toFixed(2)}`;document.getElementById("cartDiscountRow").style.display=a>0?"flex":"none";document.querySelector(".cart-count").innerText=r}
-function updateQty(e,t){cart[e].qty+=t;cart[e].qty<=0&&cart.splice(e,1);saveCart()}
-function removeItem(e){cart.splice(e,1);saveCart()}
-function remindMe(e){const t=productsData.find(s=>s.id===e),s=prompt(translations[currentLang]["reminder-email"]);if(!s)return;const a={productId:e,productName:typeof(t&&t.title)==="object"?(t.title&&(t.title.tr||t.title.ar||""))||"":(t&&(t.name||t.title))||"",email:s,createdAt:firebase.firestore.FieldValue.serverTimestamp(),notified:!1};db.collection("reminders").add(a).then(()=>showToast(translations[currentLang]["reminder-saved"])).catch(e=>{console.error(e);alert("Error: "+e.message)})}
-function openCheckout(){if(cart.length===0)return alert(translations[currentLang]["empty-cart"]);document.getElementById("cartSidebar").classList.contains("active")&&toggleCart();document.getElementById("checkoutModal").classList.add("active")}
-function closeCheckout(){document.getElementById("checkoutModal").classList.remove("active")}
-function showToast(e){const t=document.getElementById("toast");t.innerText=e;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3e3)}
-document.getElementById("orderForm").addEventListener("submit",async e=>{e.preventDefault();const t=translations[currentLang],s=e.target.querySelector(".submit-order-btn"),a=s.innerText;s.innerText="...";s.disabled=!0;const n=cart.map(e=>({id:e.id,title:e.title,price:parseFloat(e.price)||0,finalPrice:parseFloat(e.finalPrice)||0,discount:parseFloat(e.discount)||0,qty:e.qty||1,img:e.img||""}));let r=0,o=0,l=0;n.forEach(e=>{r+=e.price*e.qty;o+=(e.price-e.finalPrice)*e.qty;l+=e.finalPrice*e.qty});const c={date:(new Date).toISOString(),createdAt:firebase.firestore.FieldValue.serverTimestamp(),name:document.getElementById("custName").value.trim(),phone:document.getElementById("custPhone").value.trim(),city:document.getElementById("custCity").value.trim(),address:document.getElementById("custAddress").value.trim(),items:n,subtotal:parseFloat(r.toFixed(2)),totalDiscount:parseFloat(o.toFixed(2)),total:parseFloat(l.toFixed(2)),lang:currentLang,status:"pending"};if(!c.name||!c.phone||!c.city||!c.address){showToast(t["fill-fields"]);s.innerText=a;s.disabled=!1;return}try{await db.collection("orders").add(c);const e=document.createElement("div");e.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:5000;display:flex;justify-content:center;align-items:center;text-align:center;color:white;flex-direction:column;padding:20px;backdrop-filter:blur(10px);";e.innerHTML=`<div style="background:var(--card-bg);padding:50px 30px;border-radius:20px;border:2px solid var(--gold);max-width:500px;"><div style="font-size:70px;color:var(--pal-green);margin-bottom:15px;">✓</div><h2 style="font-size:24px;margin-bottom:10px;color:var(--text-main);font-weight:900;">${t["order-received"]}</h2></div>`;document.body.appendChild(e);setTimeout(()=>e.remove(),4e3);cart=[];saveCart();closeCheckout();document.getElementById("orderForm").reset()}catch(e){console.error("Order error:",e);alert(t["order-error"])}finally{s.innerText=a;s.disabled=!1}});
-function loadProducts(){const e=document.getElementById("productsGrid");e&&(e.innerHTML=`<p style="text-align:center;grid-column:1/-1;color:var(--text-light);">${translations[currentLang]["loading"]}</p>`);db.collection("products").orderBy("createdAt","desc").onSnapshot(t=>{productsData=[];t.forEach(e=>{const t=e.data();productsData.push({id:e.id,name:t.name||"",title:t.title||t.name||"",price:parseFloat(t.price)||0,discount:parseFloat(t.discount)||0,desc:t.desc||"",image:t.image||"",inStock:t.inStock!==!1})});renderProducts()},t=>{console.error(t);e&&(e.innerHTML=`<p style="text-align:center;grid-column:1/-1;color:red;">⚠️ ${t.message}</p>`)})}
-document.addEventListener("DOMContentLoaded",()=>{changeLang(localStorage.getItem("miracLang")||"tr");loadProducts();renderCart()});
-document.addEventListener("keydown",e=>{e.key==="Escape"&&(closeCheckout(),document.getElementById("cartSidebar").classList.contains("active")&&toggleCart())});
+const firebaseConfig = {
+  apiKey: "AIzaSyC0-EP2Bi-zFZFMZIducA-HiEP8gr8Q6tI",
+  authDomain: "miraj-new.firebaseapp.com",
+  projectId: "miraj-new",
+  storageBucket: "miraj-new.firebasestorage.app",
+  messagingSenderId: "817739704878",
+  appId: "1:817739704878:web:0d3c0d6e1f80ab8a784dbf"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+let lang = 'tr', cart = [], products = [];
+
+const T = {
+  tr: { nav1: "Ürünler", nav2: "Hakkımızda", cart: "Sepet", hero1: "Bir vatana benzeyen<br><span>bir parça.</span>", hero2: "Onu taktığınızda, unutulmaz bir toprağın hatırasını taşırsınız.", shopNow: "Şimdi Al", latest: "En Yeni <span>Ürünler</span>", aboutTitle: "Biz <span>Kimiz?</span>", about1: "Miraç, Filistin ile Türkiye arasında bir köprüdür.", about2: "Kudüs'ün kalbinden kalbinize, Filistin mirasından ilham alan ürünler.", add: "Sepete Ekle", empty: "Sepetiniz boş", sub: "Ara Toplam:", disc: "İndirim (10%):", tot: "Toplam:" },
+  ar: { nav1: "المنتجات", nav2: "من نحن", cart: "السلة", hero1: "قطعة تُشبه وطناً..<br><span>لا يغيب.</span>", hero2: "حين ترتديها، فأنت تحمل معك ذاكرة أرضٍ لا تُنسى.", shopNow: "تسوق الآن", latest: "أحدث <span>المنتجات</span>", aboutTitle: "من <span>نحن؟</span>", about1: "معراج جسر يربط فلسطين بتركيا.", about2: "من قلب القدس إلى قلبك، منتجات تحمل حكايات فلسطين.", add: "أضف للسلة", empty: "السلة فارغة", sub: "المجموع:", disc: "الخصم (10%):", tot: "الإجمالي:" },
+  en: { nav1: "Products", nav2: "About", cart: "Cart", hero1: "A piece that resembles<br><span>a homeland.</span>", hero2: "When you wear it, you carry the memory of an unforgettable land.", shopNow: "Shop Now", latest: "Latest <span>Products</span>", aboutTitle: "Who <span>We Are</span>", about1: "Miraj is a bridge between Palestine and Turkey.", about2: "From the heart of Jerusalem to your heart.", add: "Add to Cart", empty: "Cart is empty", sub: "Subtotal:", disc: "Discount (10%):", tot: "Total:" }
+};
+
+function setLang(l) {
+  lang = l;
+  document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.querySelectorAll('.lang-sw span').forEach((s, i) => {
+    s.classList.remove('active');
+    if((l==='ar'&&i===0)||(l==='en'&&i===1)||(l==='tr'&&i===2)) s.classList.add('active');
+  });
+  document.querySelectorAll('[data-key]').forEach(el => { if(T[l][el.dataset.key]) el.innerHTML = T[l][el.dataset.key]; });
+  renderProducts();
+  renderCart();
+}
+
+db.collection('products').orderBy('createdAt', 'desc').onSnapshot(s => {
+  products = []; s.forEach(d => products.push({ id: d.id, ...d.data() }));
+  renderProducts();
+});
+
+function renderProducts() {
+  const grid = document.getElementById('grid');
+  if(!products.length) return grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;">Yükleniyor...</p>';
+  grid.innerHTML = products.map(p => {
+    const final = p.discount > 0 ? p.price * (1 - p.discount/100) : p.price;
+    const title = typeof p.title === 'object' ? (p.title[lang] || p.title.tr) : p.name;
+    return `
+    <div class="pcard">
+      <div class="pimg">
+        <img src="${p.image || 'https://via.placeholder.com/300'}" onerror="this.src='https://via.placeholder.com/300'">
+        ${p.discount > 0 ? `<span class="badge">-${p.discount}%</span>` : ''}
+      </div>
+      <div class="pinfo">
+        <div class="ptitle">${title}</div>
+        <div class="pprice">₺ ${final.toFixed(2)}</div>
+        <button class="pbtn" onclick="addToCart('${p.id}')">🛒 ${T[lang].add}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  const ex = cart.find(x => x.id === id);
+  if(ex) ex.qty++;
+  else {
+    const final = p.discount > 0 ? p.price * (1 - p.discount/100) : p.price;
+    cart.push({ id: p.id, title: p.title, price: p.price, finalPrice: final, img: p.image, qty: 1 });
+  }
+  toggleCart(true);
+}
+
+function toggleCart(open) {
+  document.getElementById('cartSidebar').classList.toggle('on', open);
+  document.getElementById('overlay').classList.toggle('on', open);
+  renderCart();
+}
+
+function renderCart() {
+  const body = document.getElementById('cartBody'), foot = document.getElementById('cartFoot');
+  let sub = 0;
+  if(!cart.length) {
+    body.innerHTML = `<p style="text-align:center;padding:40px;">${T[lang].empty}</p>`;
+    foot.innerHTML = '';
+    document.getElementById('cartCount').innerText = '0';
+    return;
+  }
+  body.innerHTML = cart.map((i, idx) => {
+    sub += (i.finalPrice * i.qty);
+    const title = typeof i.title === 'object' ? (i.title[lang] || i.title.tr) : i.title;
+    return `
+    <div class="cart-item">
+      <img src="${i.img || 'https://via.placeholder.com/60'}">
+      <div style="flex:1;">
+        <div style="font-weight:800;font-size:14px;">${title}</div>
+        <div style="color:var(--gold);font-weight:900;">₺ ${(i.finalPrice * i.qty).toFixed(2)}</div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:5px;">
+          <button onclick="qty(${idx},-1)" style="width:25px;height:25px;border-radius:50%;border:none;background:#eee;cursor:pointer;">-</button>
+          <span>${i.qty}</span>
+          <button onclick="qty(${idx},1)" style="width:25px;height:25px;border-radius:50%;border:none;background:#eee;cursor:pointer;">+</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  
+  const disc = sub * 0.10;
+  const total = sub - disc;
+  foot.innerHTML = `
+    <div class="total-line"><span>${T[lang].sub}</span><span>₺ ${sub.toFixed(2)}</span></div>
+    <div class="total-line" style="color:var(--red);"><span>${T[lang].disc}</span><span>− ₺ ${disc.toFixed(2)}</span></div>
+    <div class="total-line" style="font-size:20px;margin-top:10px;border-top:1px solid #ccc;padding-top:10px;"><span>${T[lang].tot}</span><span>₺ ${total.toFixed(2)}</span></div>
+    <button class="checkout-btn" onclick="document.getElementById('checkoutModal').classList.add('on')" style="margin-top:15px;">إتمام الطلب / Checkout</button>
+  `;
+  document.getElementById('cartCount').innerText = cart.reduce((s, i) => s + i.qty, 0);
+}
+
+function qty(i, d) { cart[i].qty += d; if(cart[i].qty <= 0) cart.splice(i, 1); renderCart(); }
+
+document.getElementById('orderForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if(!cart.length) return;
+  let sub = cart.reduce((s, i) => s + (i.finalPrice * i.qty), 0);
+  const disc = sub * 0.10;
+  const total = sub - disc;
+  
+  const order = {
+    date: new Date().toISOString(),
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    name: document.getElementById('fName').value,
+    phone: document.getElementById('fPhone').value,
+    city: document.getElementById('fCity').value,
+    address: document.getElementById('fAddr').value,
+    items: cart,
+    subtotal: sub,
+    totalDiscount: disc,
+    total: total,
+    status: 'pending'
+  };
+  
+  await db.collection('orders').add(order);
+  cart = [];
+  renderCart();
+  toggleCart(false);
+  document.getElementById('checkoutModal').classList.remove('on');
+  alert('تم الطلب بنجاح! Siparişiniz alındı!');
+});
+
+setLang('tr'); // اللغة التركية افتراضياً
 </script>
 </body>
 </html>
